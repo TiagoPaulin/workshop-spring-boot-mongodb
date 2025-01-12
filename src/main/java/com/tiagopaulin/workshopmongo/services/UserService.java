@@ -48,6 +48,22 @@ public class UserService {
 
     }
 
+    public User update (User user) {
+
+        User newUser = repository.findById(user.getId()).orElse(null);
+        updateData(newUser, user);
+
+        return repository.save(newUser);
+
+    }
+
+    public void updateData(User newUser, User user) {
+
+        newUser.setName(user.getName());
+        newUser.setEmail(user.getEmail());
+
+    }
+
     public User fromDTO(UserDTO userDTO) {
 
         return new User(userDTO.getId(), userDTO.getName(), userDTO.getEmail());
